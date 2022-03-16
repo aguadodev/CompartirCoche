@@ -2,6 +2,7 @@ package compartircoche;
 
 public class Coche {
 
+
     protected final String marca;
     protected final String color;
     protected final int plazas;
