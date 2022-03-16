@@ -1,2 +1,8 @@
-package compartircoche;public class Pasajero {
+package compartircoche;
+
+public class Pasajero extends Persona {
+
+    public Pasajero(String nombre) {
+        super(nombre);
+    }
 }
