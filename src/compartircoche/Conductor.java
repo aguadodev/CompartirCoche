@@ -1,15 +1,17 @@
-package compartircoche;
+package compartirCoche;
 
 public class Conductor extends Persona {
 
-    protected final Coche coche;
+    protected Coche coche;
+
 
     public Conductor(String nombre, Coche coche) {
         super(nombre);
         this.coche = coche;
     }
 
-    public Coche getCoche() {
-        return coche;
+    public String getNombre(){
+        return nombre;
+
     }
 }

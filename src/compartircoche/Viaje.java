@@ -3,49 +3,58 @@ package compartircoche;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 
+/**
+ *
+ * @author Roberto Santos Cordeiro
+ */
 public class Viaje {
-
-    protected final Conductor conductor;
-    protected final PuntoEncuentro puntoSalida;
-    protected final PuntoEncuentro puntoLlegada;
-    protected final LocalDateTime fechaHoraSalida;
-
+    protected Conductor conductor;
+    protected LocalDateTime fechaYHoraSalida;
+    protected PuntoEncuentro puntoSalida;
+    protected PuntoEncuentro puntoLlegada;
+    protected byte plazas;
     protected Pasajero[] pasajeros;
-
-    public Viaje(Conductor conductor, LocalDateTime fechaHoraSalida, PuntoEncuentro puntoSalida,
-                 PuntoEncuentro puntoLlegada, int plazasOfertadas) {
+    
+    // CONSTRUCTOR
+    public Viaje(Conductor conductor, LocalDateTime fechaYHoraSalida, 
+            PuntoEncuentro PuntoSalida, PuntoEncuentro PuntoLlegada, int plazas) {
         this.conductor = conductor;
-        this.fechaHoraSalida = fechaHoraSalida;
-        this.puntoLlegada = puntoLlegada;
-        this.puntoSalida = puntoSalida;
-        pasajeros = new Pasajero[plazasOfertadas];
+        this.fechaYHoraSalida = fechaYHoraSalida;
+        this.puntoSalida = PuntoSalida;
+        this.puntoLlegada = PuntoLlegada;
+        this.plazas = (byte)plazas;
+        pasajeros = new Pasajero[0];
     }
-
-    public void addPasajero(Pasajero pasajero) {
-        for (int i = 0; i < pasajeros.length; i++) {
-            if (pasajeros[i] == null) {
-                pasajeros[i] = pasajero;
-                return;
-            }
+    
+    // MÉTODOS
+    void addPasajero(Pasajero pasajero){
+        
+        if(pasajeros.length < plazas){
+            pasajeros = Arrays.copyOf(pasajeros, pasajeros.length + 1);
+            pasajeros[pasajeros.length - 1] = pasajero;
         }
-        System.out.println("No se ha podido agregar al pasajero " + pasajero.getNombre() + ", el coche está lleno.");
+    }
+    
+    public int plazasLibres(){
+        return plazas - pasajeros.length;
+    }
+    
+    public int plazasOcupadas(){
+        return pasajeros.length;
     }
 
-    public int plazasLibres() {
-        int c = 0;
-        for (Pasajero pasajero : pasajeros) if (pasajero == null) c++;
-        return c;
-    }
-
+    @Override
     public String toString() {
-        return "Viaje compartido:\n" +
-                "==================\n" +
-                "Fecha y hora: " + fechaHoraSalida.toString() + "\n" +
-                "Lugar de salida: " + puntoSalida.getNombre() + " (" + puntoSalida.getAltitud() + ", " + puntoSalida.getLatitud() + ")\n" +
-                "Lugar de llegada: " + puntoLlegada.getNombre() + " (" + puntoLlegada.getAltitud() + ", " + puntoLlegada.getLatitud() + ")\n" +
-                "Plazas ofertadas: " + pasajeros.length + "\n" +
-                "Conductor: " + conductor.getNombre() + "\n" +
-                "Coche: " + conductor.getCoche().getMarca() + " " + conductor.getCoche().getColor() + ", " + conductor.getCoche().getPlazas() +
-                    " plazas, matrícula " + conductor.getCoche().getMatricula();
+        String nomPasajeros = "";
+        
+        for(Pasajero pasajero : pasajeros){
+            nomPasajeros += pasajero.nombre + "\n\t";
+        }
+        
+        return "Viaje{" + "\n\tConductor: " + conductor.nombre + "\n\tFecha y hora de salida: " 
+                + fechaYHoraSalida + "\n\tPunto de salida: " + puntoSalida.nombre 
+                + "\n\tPunto de llegada: " + puntoLlegada.nombre + "\n\tPlazas: " + plazas 
+                + "\n\n\tPasajeros:\n\t" + nomPasajeros + "\n}";
     }
+
 }

@@ -1,28 +1,24 @@
-package compartircoche;
+package viajes;
 
+/**
+ *
+ * @author Gabriel Lueiro Rivas
+ */
 public class PuntoEncuentro {
 
-    private final String nombre;
-    private final double altitud;
-    private final double latitud;
+    private String nombre;
+    private double coordenadaX;
+    private double coordenadaY;
 
-
-
-    public PuntoEncuentro(String nombre, double altitud, double latitud) {
-        this.nombre = nombre;
-        this.altitud = altitud;
-        this.latitud = latitud;
+    public PuntoEncuentro(String direccion, double coordenadaX, double coordenadaY) {
+        this.nombre = direccion;
+        this.coordenadaX = coordenadaX;
+        this.coordenadaY = coordenadaY;
     }
 
-    public String getNombre() {
-        return nombre;
-    }
 
-    public double getAltitud() {
-        return altitud;
-    }
-
-    public double getLatitud() {
-        return latitud;
+    @Override
+    public String toString() {
+        return nombre; //To change body of generated methods, choose Tools | Templates.
     }
 }
