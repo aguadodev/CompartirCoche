@@ -1,4 +1,3 @@
-
 package personas;
 
 /**
@@ -8,8 +7,7 @@ package personas;
 public class Pasajero extends Persona {
 
     public Pasajero(String nombre) {
-        this.nombre = nombre;
+        super(nombre);
     }
 
-    
 }

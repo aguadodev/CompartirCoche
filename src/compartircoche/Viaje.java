@@ -57,5 +57,4 @@ public class Viaje {
                 + "\n\n\tPasajeros:\n\t" + nomPasajeros + "\n}";
     }
 
-    
 }
